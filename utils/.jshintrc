@@ -2,7 +2,10 @@
   "globals": {
     "module": true,
     "EventEmitter2" : true,
-    "ROSLIB" : true
+    "ROSLIB" : true,
+    "ROS3D" : true,
+    "ROS2D" : true,
+    "THREE" : true
   },
   "curly": true,
   "eqeqeq": true,

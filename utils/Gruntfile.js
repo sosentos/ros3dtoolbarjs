@@ -5,7 +5,7 @@ module.exports = function(grunt) {
     concat: {
       build: {
         src  : ['../src/*.js', '../src/**/*.js'],
-        dest : '../build/mypackage.js'
+        dest : '../build/ros3dtoolbar.js'
       }
     },
     jshint: {
@@ -14,7 +14,7 @@ module.exports = function(grunt) {
       },
       files: [
         'Gruntfile.js',
-        '../build/mypackage.js'
+        '../build/ros3dtoolbar.js'
       ]
     },
     uglify: {
@@ -22,8 +22,8 @@ module.exports = function(grunt) {
         report: 'min'
       },
       build: {
-        src: '../build/mypackage.js',
-        dest: '../build/mypackage.min.js'
+        src: '../build/ros3dtoolbar.js',
+        dest: '../build/ros3dtoolbar.min.js'
       }
     },
     watch: {
