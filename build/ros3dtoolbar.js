@@ -36,6 +36,7 @@ ROS3DTOOLBAR.TFListManager = function(options){
 
   });
 
+    console.log(this.fixedFrame);
   var request = new ROSLIB.ServiceRequest({});
 
   tfListerClient.callService(request, function(response) {
@@ -53,6 +54,7 @@ ROS3DTOOLBAR.TFListManager = function(options){
     var foundMatchingFrame = false;
 
     // Add all available TFs in the list
+      console.log(tfs.length);
     for(var f=0; f < tfs.length; f++){
 
       // For each tf found, create a new option element
@@ -69,6 +71,7 @@ ROS3DTOOLBAR.TFListManager = function(options){
       if(tfs[f] === that.fixedFrame){
         dropdown.selectedIndex = f;
         foundMatchingFrame = true;
+	that.emit('change', that.fixedFrame);
       }
     }
 
@@ -83,7 +86,7 @@ ROS3DTOOLBAR.TFListManager = function(options){
   var dropdown=document.getElementById(this.elementId);
   
   //add event listener that handles changes to frame
-  dropdown.addEventListener('click',function(){
+  dropdown.addEventListener('change', function(){
     var tfs = document.getElementById(that.elementId).options;
     var i = document.getElementById(that.elementId).selectedIndex;
     console.log('Your current fixed frame is...');
@@ -174,7 +177,7 @@ ROS3DTOOLBAR.Toolbar = function(options){
   var visPanelOpen = document.getElementById('vis-panel-open');
   visPanelOpen.addEventListener('click', function(){
     if(that.createdPopUp===false){
-
+	console.log(that.createdPopUp);
       var visualizationDiv=document.getElementById('visualization-dialog');
       var dialog = document.createElement('div');
       dialog.setAttribute('id','main-container');
@@ -263,7 +266,12 @@ ROS3DTOOLBAR.Toolbar = function(options){
         elementId : 'tfsDropdown',
         fixedFrame : '/base_link'
       });
-      
+
+      tfListmanager.on('change', function(frame){
+         that.currentFixedFrame=frame;
+      });
+
+	
       that.createdPopUp=true;
     }
     //Jquery popup

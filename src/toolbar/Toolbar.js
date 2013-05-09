@@ -76,7 +76,7 @@ ROS3DTOOLBAR.Toolbar = function(options){
   var visPanelOpen = document.getElementById('vis-panel-open');
   visPanelOpen.addEventListener('click', function(){
     if(that.createdPopUp===false){
-
+	console.log(that.createdPopUp);
       var visualizationDiv=document.getElementById('visualization-dialog');
       var dialog = document.createElement('div');
       dialog.setAttribute('id','main-container');
@@ -165,7 +165,12 @@ ROS3DTOOLBAR.Toolbar = function(options){
         elementId : 'tfsDropdown',
         fixedFrame : '/base_link'
       });
-      
+
+      tfListmanager.on('change', function(frame){
+         that.currentFixedFrame=frame;
+      });
+
+	
       that.createdPopUp=true;
     }
     //Jquery popup
