@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+  <head>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="language" content="en" />
+    
+    <link rel="stylesheet" type="text/css" href="../include/jquery-ui/jquery-ui-1.10.2.custom.css" />
+
+    
+    <!--Link to included dependencies-->
+    <script type="text/javascript" src="http://cdn.robotwebtools.org/threejs/current/three.min.js"></script>
+    <script type="text/javascript" src="../include/EventEmitter2/eventemitter2.js"></script>
+    <script type="text/javascript" src="../include/roslibjs/roslib.js"></script>
+    <script type="text/javascript" src="../include/ros3djs/ros3d.js"></script>
+    
+    <!--required for the layout widget-->
+    <script type="text/javascript" src="../include/jquery/jquery-2.0.0.js"></script>
+    <script type="text/javascript" src="../include/jquery-ui/jquery-ui-1.10.2.custom.js"></script>
+    
+    <script type="text/javascript" src="../build/ros3dtoolbar.js"></script>
+  
+
+    <link rel="stylesheet" type="text/css" href="../include/jquery-ui/jquery-ui-1.10.2.custom.css" />
+
+    <title>ROS Visualization Page</title>
+    
+    <script type="text/javascript" type="text/javascript">
+
+      function init(){
+        
+      var ros = new ROSLIB.Ros({
+        url : 'ws://localhost:9090'
+      });
+        
+      var viewer=new ROS3D.Viewer({
+        divID : 'viewer',
+        width : 800, 
+        height : 600,
+        antialias : true
+      });
+
+      var toolbar=new ROS3DTOOLBAR.Toolbar({
+        divID : 'toolbar',
+        ros : ros,
+        viewer : viewer
+      });
+   }
+  
+    </script>
+   
+
+  </head>
+
+  <body onload="init()">
+    <div id="viewer"></div>
+    
+    <!-- Our toolbar -->
+    <div id="toolbar"></div>
+    
+    
+  </body>
+</html>

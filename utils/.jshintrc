@@ -5,7 +5,8 @@
     "ROSLIB" : true,
     "ROS3D" : true,
     "ROS2D" : true,
-    "THREE" : true
+    "THREE" : true, 
+    "$" : true
   },
   "curly": true,
   "eqeqeq": true,
