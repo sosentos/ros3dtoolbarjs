@@ -24,29 +24,6 @@ ROS3DTOOLBAR.Toolbar = function(options){
   this.currentFixedFrame=null;
   this.createdPopUp=false;
 
-  //List of types we can display
-  this.displayoptions=[];
-  this.displayoptions.push(['Axes', 'AxesNode']);
-  this.displayoptions.push(['Camera', 'CameraNode']);
-  //this.displayoptions.push(['Snapshot', "SnapshotNode"]);
-  this.displayoptions.push(['Grid', 'GridNode']);
-  //this.displayoptions.push(['GridCells', "GridCellsNode"]);
-  //this.displayoptions.push(['Image', "ImageNode"]);
-  this.displayoptions.push(['InteractiveMarker', 'InteractiveMarkerNode']);
-  this.displayoptions.push(['LaserScan', 'LaserScanNode']);
-  //this.displayoptions.push(['Map', "MapNode"]);
-  this.displayoptions.push(['Marker', 'MarkerNode']);
-  //this.displayoptions.push(['Path', "PathNode"]);
-  //this.displayoptions.push(['Pose',"PoseNode"]);
-  //this.displayoptions.push(['PoseArray', "PoseArrayNode"]);
-  this.displayoptions.push(['PointCloud2', 'PointCloud2Node']);
-  //this.displayoptions.push(['Polygon', "PolygonNode"]);
-  //this.displayoptions.push(['Odometry', "OdometryNode"]);
-  //this.displayoptions.push(['Range', "RangeNode"]);
-  this.displayoptions.push(['RobotModel', 'RobotModelNode']);
-  this.displayoptions.push(['TF', 'TFNode']);
-
-
   //create html to fill in div
   var div=document.getElementById(divID);
   var button = document.createElement('button');
@@ -99,21 +76,10 @@ ROS3DTOOLBAR.Toolbar = function(options){
       var tfsDropdown = document.createElement('select');
       tfsDropdown.setAttribute('id','tfsDropdown');
 
-      var addDisplayDropdown = document.createElement('select');
-      addDisplayDropdown.setAttribute('id','addDisplayDropdown');
+      var displayDropDownId='displayDropDown';
+      var addDisplayDropdown = document.createElement('div');
+      addDisplayDropdown.setAttribute('id', displayDropDownId);
 
-      // Populate the addItemDropdown List.
-      console.log(that.displayoptions.length);
-      for(var i=0; i < that.displayoptions.length; i++) {
-        // For each item in the list new option element
-        var opt = document.createElement('option');
-        opt.setAttribute('value',that.displayoptions[i][0]);
-        opt.setAttribute('title',that.displayoptions[i][0]);
-        opt.innerHTML = that.displayoptions[i][0];
-
-        // And then append the option element to our list
-        addDisplayDropdown.appendChild(opt);
-      }
 
       var addButton = document.createElement('button');
       addButton.setAttribute('id', 'addDisplayBtn');
@@ -167,10 +133,13 @@ ROS3DTOOLBAR.Toolbar = function(options){
       });
 
       tfListmanager.on('change', function(frame){
-         that.currentFixedFrame=frame;
+        that.currentFixedFrame=frame;
+      });
+     
+      var displayOptionManager = new ROS3DTOOLBAR.DisplayOptionManager({
+        elementId : displayDropDownId
       });
 
-	
       that.createdPopUp=true;
     }
     //Jquery popup
